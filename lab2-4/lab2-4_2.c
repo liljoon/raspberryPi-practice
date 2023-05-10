@@ -54,7 +54,7 @@ void FndDisplay(int position, int num) {
 
 int main() {
 	int pos;
-	intdata[6]={0,1,2,3,4,5}; //출력할문자데이터
+	int data[6]={0,1,2,3,4,5}; //출력할문자데이터
 
 	Init();
 	while(1) {
@@ -62,5 +62,6 @@ int main() {
 			FndDisplay( pos, data[ pos ] );
 			delay(1); // WiringPi 라이브러리에서 정의된 delay() 함수, void delay( unsinged int howLong ) }
 		}
+	}
 	return 0;
 }
