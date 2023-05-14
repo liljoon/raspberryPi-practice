@@ -47,16 +47,21 @@ int main(void)
 	softPwmCreate(MOTOR_MT_P_PIN, 0, 128);
 
 	int speed = 32;
-	for (int i = 0; i < 4; i++)
+	int i;
+	for (i = 0; i < 4; i++)
 	{
 		MotorControl(LEFT_ROTATE, speed);
+		delay(2000);
+		MotorStop();
 		delay(2000);
 		speed += 32;
 	}
 	speed = 128;
-	for (int i = 0; i < 4; i++)
+	for (i = 0; i < 4; i++)
 	{
 		MotorControl(RIGHT_ROTATE, speed);
+		delay(2000);
+		MotorStop();
 		delay(2000);
 		speed -= 32;
 	}
