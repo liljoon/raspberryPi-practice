@@ -1,6 +1,7 @@
 #include <wiringPi.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 #define FIFO_FILE ".fifo"
 

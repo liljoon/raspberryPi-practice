@@ -4,6 +4,7 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 const int FndSelectPin[6] = {4, 17, 18, 27, 22, 23};
 const int FndPin[8] = {6, 12, 13, 16, 19, 20, 26, 21};
