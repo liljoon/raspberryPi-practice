@@ -145,7 +145,6 @@ int main()
 	pthread_t tid;
 	int err;
 
-	
 	err = mkfifo(FIFO_FILE, 0666);
 	pid = fork();
 	if (pid == 0)
@@ -163,5 +162,9 @@ int main()
 	else
 	{
 		write_start_sign();
+		printf("Content-type:text/html\n\n");
+		printf("<html>\n<head>\n<title>Stopwatch</title>\n</head>\n");
+		printf("<body>\n<p>Stopwatch Start</p>\n");
+		printf("</body>\n</html>");
 	}
 }
