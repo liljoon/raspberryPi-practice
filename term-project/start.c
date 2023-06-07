@@ -148,6 +148,11 @@ int main()
 	}
 	else
 	{
-		watch_status = 1;
+		int fd;
+		char ch;
+
+		fd = open(FIFO_FILE, O_WRONLY);
+		ch = '1';
+		write(fd, &ch, 1);
 	}
 }
