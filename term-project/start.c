@@ -71,6 +71,8 @@ void *mover_timer(void *data)
 {
 	while (1)
 	{
+		while (watch_status == 0)
+			;
 		delay(10);
 		count++;
 		if (count == 1000000)
@@ -123,36 +125,43 @@ void start_watch()
 			tmp /= 10;
 			delay(1);
 		}
-		while (watch_status == 0)
-			;
 	}
+}
+
+void write_start_sign()
+{
+
+	int fd;
+	char ch;
+
+	fd = open(FIFO_FILE, O_WRONLY);
+	ch = '1';
+	write(fd, &ch, 1);
 }
 
 int main()
 {
 	pid_t pid;
 	pthread_t tid;
+	int err;
 
+	
+	err = mkfifo(FIFO_FILE, 0666);
 	pid = fork();
 	if (pid == 0)
 	{
-		if (mkfifo(FIFO_FILE, 0666) == -1) // 첫실행 아닌 경우
+		if (err == -1) // 첫실행 아닌 경우
 		{
-			return 0;
+			exit(0);
 		}
 		else // 첫 실행인 경우
 		{
-			pthread_create(&tid, 0, start_watch, 0);
+			pthread_create(&tid, 0, (void *)start_watch, 0);
 			monitoring();
 		}
 	}
 	else
 	{
-		int fd;
-		char ch;
-
-		fd = open(FIFO_FILE, O_WRONLY);
-		ch = '1';
-		write(fd, &ch, 1);
+		write_start_sign();
 	}
 }
